@@ -1,0 +1,428 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>EvidAudit | AI Agent Regression Testing &amp; Evidence Auditing</title>
+  <meta name="description" content="Open-source regression testing for AI agents and LLM decision pipelines. Detect hidden evidence errors, unsafe approvals, and policy regressions before production." />
+  <link rel="canonical" href="https://saitejamutchi.github.io/evidaudit/" />
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="EvidAudit | Your AI agent passed the test. Did its reasoning?" />
+  <meta property="og:description" content="Detect hidden evidence errors, unsafe approvals, and policy regressions before your AI agents reach production." />
+  <meta property="og:url" content="https://saitejamutchi.github.io/evidaudit/" />
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="EvidAudit | AI Agent Regression Testing" />
+  <meta name="twitter:description" content="Detect hidden evidence errors, unsafe approvals, and policy regressions before your AI agents reach production." />
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "name": "EvidAudit",
+    "applicationCategory": "DeveloperApplication",
+    "operatingSystem": "Cross-platform",
+    "softwareVersion": "0.1.0",
+    "url": "https://saitejamutchi.github.io/evidaudit/",
+    "codeRepository": "https://github.com/SaiTejaMutchi/evidaudit",
+    "license": "https://opensource.org/licenses/MIT"
+  }
+  </script>
+  <script>
+    (function () {
+      const q = new URLSearchParams(window.location.search).get("theme");
+      const saved = localStorage.getItem("evidaudit-theme");
+      const preferred = window.matchMedia && window.matchMedia("(prefers-color-scheme: light)").matches ? "light" : "dark";
+      document.documentElement.setAttribute("data-theme", q === "light" || q === "dark" ? q : (saved || preferred));
+    })();
+  </script>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <nav class="site-nav" aria-label="Primary Navigation">
+    <div class="container nav-inner">
+      <a class="brand" href="https://saitejamutchi.github.io/evidaudit/">
+        <span class="mono">evidaudit</span>
+        <span class="brand-version mono">v0.1.0</span>
+      </a>
+      <div id="nav-links" class="nav-links">
+        <a href="#playground">Playground</a>
+        <a href="#how-it-works">How It Works</a>
+        <a href="docs/python-quick-start.html">Docs</a>
+        <a href="docs/research.html">Research</a>
+      </div>
+      <div class="nav-actions">
+        <button id="theme-toggle" class="icon-btn" type="button" aria-label="Toggle light and dark theme">Light Mode</button>
+        <a class="icon-btn" href="https://github.com/SaiTejaMutchi/evidaudit" target="_blank" rel="noopener">GitHub</a>
+        <button id="mobile-menu-btn" class="icon-btn mobile-menu-btn" type="button" aria-expanded="false" aria-controls="nav-links">Menu</button>
+      </div>
+    </div>
+  </nav>
+
+  <header class="hero">
+    <div class="container">
+      <p class="hero-kicker mono">Open-source regression testing for AI agents (MIT)</p>
+      <h1>Your AI agent passed the test. Did its reasoning?</h1>
+      <p class="subtitle">
+        Detect hidden evidence errors, unsafe approvals, and policy regressions before your AI agents reach production.
+      </p>
+      <div class="hero-actions">
+        <a class="btn-primary" href="#playground">Try Live Demo</a>
+        <a class="btn-outline" href="https://github.com/SaiTejaMutchi/evidaudit" target="_blank" rel="noopener">View on GitHub</a>
+      </div>
+      <div class="install-bar">
+        <code id="install-cmd">pip install git+https://github.com/SaiTejaMutchi/evidaudit.git</code>
+        <button id="copy-install-btn" class="copy-btn" type="button">Copy</button>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <!-- 10-SECOND PROBLEM TRACE -->
+    <section id="problem" class="section">
+      <div class="container">
+        <div class="section-header">
+          <h2>Why outcome-only tests miss production failures</h2>
+          <p>
+            An agent can return the right decision today while relying on a wrong extracted fact. Standard output checks pass until a policy rule changes.
+          </p>
+        </div>
+        <div class="trace-list" role="list">
+          <div class="trace-row is-warn" role="listitem">
+            <span class="trace-stage mono">1. Extracted Fact</span>
+            <span class="trace-fact mono">prohib_export = FALSE</span>
+            <span class="trace-note">The LLM misreads evidence <code>E2</code>. Ground truth is <code>TRUE</code> (restricted).</span>
+          </div>
+          <div class="trace-row" role="listitem">
+            <span class="trace-stage mono">2. Masked Decision</span>
+            <span class="trace-fact">Gate returns <code>ALLOW</code></span>
+            <span class="trace-note">An active waiver (<code>ov_waiver = TRUE</code>) masks the mistake. Output evals score 100%.</span>
+          </div>
+          <div class="trace-row" role="listitem">
+            <span class="trace-stage mono">3. Policy Change</span>
+            <span class="trace-fact">Waiver is revoked</span>
+            <span class="trace-note">Security updates the rule: <code>ov_waiver</code> changes from <code>TRUE</code> to <code>FALSE</code>.</span>
+          </div>
+          <div class="trace-row is-danger" role="listitem">
+            <span class="trace-stage mono">4. Unsafe Approval</span>
+            <span class="trace-fact">Still returns <code>ALLOW</code></span>
+            <span class="trace-note">Because <code>prohib_export</code> was saved as <code>FALSE</code>, the restricted action goes through.</span>
+          </div>
+          <div class="trace-row is-ok" role="listitem">
+            <span class="trace-stage mono">5. EvidAudit</span>
+            <span class="trace-fact">Caught before deploy</span>
+            <span class="trace-note">Flags <code>concealed_corruption</code>, pinpoints <code>prohib_export</code>, and verifies <code>BLOCK</code> on fix.</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- INTERACTIVE PLAYGROUND (PRIMARY VISUAL PROOF) -->
+    <section id="playground" class="section">
+      <div class="container">
+        <div class="section-header">
+          <h2>Interactive Playground</h2>
+          <p>
+            Runs EvidAudit's deterministic <code>v2-strict</code> checker in your browser. Inspect how wrong extracted facts behave under policy changes and single-field fixes.
+          </p>
+        </div>
+
+        <div class="tabs" role="tablist" aria-label="Playground Modes">
+          <button class="tab active" role="tab" aria-selected="true" data-tab="demo-a">
+            Live Fault &amp; Policy Transition Audit
+          </button>
+          <button class="tab" role="tab" aria-selected="false" data-tab="demo-b">
+            Replay vs. Regeneration (Stored Study)
+          </button>
+        </div>
+
+        <!-- TAB 1 -->
+        <div id="demo-a" class="panel active" role="tabpanel">
+          <div class="preset-row" aria-label="Preset Scenarios">
+            <span class="preset-label">Presets:</span>
+            <button class="preset-btn active" type="button" data-preset="export-masking">Export Waiver Masking</button>
+            <button class="preset-btn" type="button" data-preset="payment-expiry">Payment Expiry (v7)</button>
+            <button class="preset-btn" type="button" data-preset="ungrounded-citation">Ungrounded Policy Citation</button>
+            <button class="preset-btn" type="button" data-preset="safe-faithful">Safe &amp; Faithful</button>
+          </div>
+
+          <div class="workbench">
+            <div class="pane">
+              <h3 class="pane-title">Input Evidence &amp; Extracted Facts</h3>
+              <div id="evidence-summary" class="evidence-box"></div>
+
+              <div class="step-buttons">
+                <button id="btn-step1" class="btn" type="button">1. Masked State (Right Decision, Wrong Fact)</button>
+                <button id="btn-step2" class="btn danger" type="button">2. Apply Policy Change (Expose Fault)</button>
+                <button id="btn-step3" class="btn success" type="button">3. Fix Extracted Fact (Restore Safe Outcome)</button>
+              </div>
+
+              <div class="control-group">
+                <label for="sel-prohib">Extracted <code id="lbl-prohib">prohib_export</code> (Expected = <strong id="ref-prohib-val">TRUE</strong>)</label>
+                <select id="sel-prohib">
+                  <option value="FALSE" selected>FALSE (Wrong extraction)</option>
+                  <option value="TRUE">TRUE (Accurate / Fixed)</option>
+                  <option value="UNKNOWN">UNKNOWN</option>
+                </select>
+              </div>
+
+              <div class="control-group">
+                <label for="sel-override">Policy Rule: <code id="lbl-override">ov_waiver</code></label>
+                <select id="sel-override">
+                  <option value="TRUE" selected>Active (TRUE, rank 3)</option>
+                  <option value="FALSE">Revoked / Expired (FALSE)</option>
+                </select>
+              </div>
+
+              <div class="control-group">
+                <label for="sel-prereq">Extracted <code id="lbl-prereq">req_clearance</code> (Expected = <strong>TRUE</strong>)</label>
+                <select id="sel-prereq">
+                  <option value="TRUE" selected>TRUE</option>
+                  <option value="FALSE">FALSE</option>
+                  <option value="UNKNOWN">UNKNOWN</option>
+                </select>
+              </div>
+
+              <div class="control-group">
+                <label for="sel-citation">Citation Grounding for Prohibition</label>
+                <select id="sel-citation">
+                  <option value="E2" selected>E2 (Grounded evidence passage)</option>
+                  <option value="P1">P1 (Ungrounded policy-only ID)</option>
+                </select>
+              </div>
+
+              <details class="json-details">
+                <summary>Raw Extracted &amp; Reference JSON</summary>
+                <pre id="json-preview" class="code-box"></pre>
+              </details>
+            </div>
+
+            <div class="pane">
+              <h3 class="pane-title">Audit Verdict &amp; Policy Transition</h3>
+              <div class="status-grid">
+                <div class="metric-box">
+                  <span class="metric-label">Expected</span>
+                  <span id="ref-decision" class="decision-pill allow">ALLOW</span>
+                </div>
+                <div class="metric-box">
+                  <span class="metric-label">Actual</span>
+                  <span id="actual-decision" class="decision-pill allow">ALLOW</span>
+                </div>
+                <div class="metric-box">
+                  <span class="metric-label">After Fix</span>
+                  <span id="repaired-decision" class="decision-pill allow">ALLOW</span>
+                </div>
+              </div>
+
+              <div id="audit-banner" class="audit-banner warn"></div>
+
+              <h4 style="margin: 0 0 6px; font-size: 13px; color: var(--muted);">Detected Discrepancies</h4>
+              <ul id="audit-details" class="detail-list"></ul>
+
+              <div class="code-header">
+                <span>Run This Check (<span id="config-format-label">YAML</span>)</span>
+                <div>
+                  <button id="btn-fmt-yaml" class="copy-btn" type="button">YAML</button>
+                  <button id="btn-fmt-py" class="copy-btn" type="button">Python</button>
+                  <button id="copy-config-btn" class="copy-btn" type="button">Copy</button>
+                </div>
+              </div>
+              <pre id="config-preview" class="code-box"></pre>
+            </div>
+          </div>
+        </div>
+
+        <!-- TAB 2 -->
+        <div id="demo-b" class="panel" role="tabpanel">
+          <div class="callout">
+            <strong>Stored Benchmark Results:</strong>
+            Matched policy transitions across 24 policy families &times; 2 models (<code>N = 96</code> paired checks) plus separate meaning-preserving updates (<code>N = 48</code>).
+          </div>
+
+          <div class="stats-strip">
+            <div class="stat-cell">
+              <div class="stat-num mono">0 / 96</div>
+              <div class="stat-title">Frozen Replay Unsafe Approvals</div>
+              <p class="stat-desc">Reusing clean Phase-1 extractions misses every transition regression (0.0%).</p>
+            </div>
+            <div class="stat-cell">
+              <div class="stat-num mono danger-text">7 / 96</div>
+              <div class="stat-title">Fresh Regeneration (Transitions)</div>
+              <p class="stat-desc">7/48 unsafe approvals on <code>ALLOW&rarr;BLOCK</code> updates when models re-extract under new policies.</p>
+            </div>
+            <div class="stat-cell">
+              <div class="stat-num mono warn-text">6 / 48</div>
+              <div class="stat-title">Fresh Regeneration (Reworded)</div>
+              <p class="stat-desc">12.5% unsafe approvals on separate meaning-preserving policy updates (vs. 17/48 = 35.4% direct judging).</p>
+            </div>
+          </div>
+
+          <div class="workbench" style="grid-template-columns: 1fr;">
+            <div class="pane">
+              <h3 class="pane-title">Inspect Stored Date-Cutoff Failure Trace</h3>
+              <p style="margin: 0 0 12px; color: var(--text-secondary); font-size: 14px;">
+                12 of 13 fresh-regeneration unsafe approvals happened because the model marked an expired date window as satisfied:
+              </p>
+              <div class="control-group" style="max-width: 420px;">
+                <label for="sel-trace">Evaluation Mode</label>
+                <select id="sel-trace">
+                  <option value="frozen">Frozen Replay (Phase-1 extraction reused)</option>
+                  <option value="fresh" selected>Fresh Regeneration (Re-extracted under v7 policy)</option>
+                </select>
+              </div>
+              <div id="trace-banner" class="audit-banner danger"></div>
+              <pre id="trace-json" class="code-box"></pre>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- WHO EXPERIENCES THIS PROBLEM -->
+    <section id="who-needs" class="section">
+      <div class="container">
+        <div class="section-header">
+          <h2>Built for engineers shipping action-authorizing AI agents</h2>
+          <p>
+            Pipeline position: <code>Upstream extraction -&gt; Structured facts -&gt; Decision engine -&gt; Action</code>.
+            EvidAudit checks the structured facts and tests how downstream decisions behave when policies change.
+          </p>
+        </div>
+        <div class="hairline-grid-2">
+          <div class="hairline-cell">
+            <h3>Procurement &amp; Export Approval Agents</h3>
+            <p>Verify that an extracted sanction or export restriction is accurate even when an active waiver masks the error today.</p>
+          </div>
+          <div class="hairline-cell">
+            <h3>Insurance Eligibility Extraction</h3>
+            <p>Catch inverted eligibility conditions that pass JSON Schema validation and produce the right claim outcome until policy rules tighten.</p>
+          </div>
+          <div class="hairline-cell">
+            <h3>Payment Authorization Pipelines</h3>
+            <p>Test date-cutoff and grace-window rules under fresh re-extraction so expired authorizations do not slip through after a policy update.</p>
+          </div>
+          <div class="hairline-cell">
+            <h3>AI Platform &amp; Evaluation Teams</h3>
+            <p>Run deterministic YAML regression suites before changing an LLM, editing an extraction prompt, revoking exceptions, or modifying agent permissions.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- HOW IT WORKS -->
+    <section id="how-it-works" class="section">
+      <div class="container">
+        <div class="section-header">
+          <h2>How EvidAudit works</h2>
+          <p>Five deterministic steps that separate intermediate extraction accuracy from final decision accuracy.</p>
+        </div>
+        <div class="numbered-list">
+          <div class="numbered-item">
+            <span class="numbered-index mono">01</span>
+            <span class="numbered-title">Provide Evidence &amp; Facts</span>
+            <span class="numbered-desc">Pass extracted fields, citation IDs, and expected ground truth via Python or YAML.</span>
+          </div>
+          <div class="numbered-item">
+            <span class="numbered-index mono">02</span>
+            <span class="numbered-title">Audit Intermediate State</span>
+            <span class="numbered-desc">Compare every extracted predicate against reference facts even when the final decision matches.</span>
+          </div>
+          <div class="numbered-item">
+            <span class="numbered-index mono">03</span>
+            <span class="numbered-title">Test Policy Transitions</span>
+            <span class="numbered-desc">Simulate waiver revocations, date-cutoff shifts, and fresh-regeneration updates.</span>
+          </div>
+          <div class="numbered-item">
+            <span class="numbered-index mono">04</span>
+            <span class="numbered-title">Pinpoint &amp; Verify Fix</span>
+            <span class="numbered-desc">Isolate the exact wrong field and verify that fixing it restores the safe outcome.</span>
+          </div>
+          <div class="numbered-item">
+            <span class="numbered-index mono">05</span>
+            <span class="numbered-title">Gate in CI/CD</span>
+            <span class="numbered-desc">Run checks in pytest, GitHub Actions, Promptfoo, or DeepEval before deployment.</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- USE CASES -->
+    <section id="use-cases" class="section">
+      <div class="container">
+        <div class="section-header">
+          <h2>Where teams use EvidAudit today</h2>
+          <p>Every capability below maps directly to shipped code, runnable YAML examples, or offline benchmark ledgers.</p>
+        </div>
+        <div class="hairline-grid-2">
+          <div class="hairline-cell">
+            <span class="cell-meta mono">Core API: Auditor</span>
+            <h3>Agent Authorization Gates</h3>
+            <p>Audit prerequisites, prohibitions, and authority-ranked overrides in deterministic <code>v2-strict</code> gates.</p>
+          </div>
+          <div class="hairline-cell">
+            <span class="cell-meta mono">YAML Runner: examples/payment_expiry.yaml</span>
+            <h3>Financial &amp; Payment Expiry</h3>
+            <p>Catch date-comparison bugs (<code>2026-11-25 &gt; 2026-11-20</code>) missed by frozen replay tests.</p>
+          </div>
+          <div class="hairline-cell">
+            <span class="cell-meta mono">Integrations: Pydantic / LangChain</span>
+            <h3>Structured Document Extraction</h3>
+            <p>Audit schema-valid JSON outputs against source documents to catch inverted booleans and missing conditions.</p>
+          </div>
+          <div class="hairline-cell">
+            <span class="cell-meta mono">Core API: test_override_revocation</span>
+            <h3>Policy-Driven Automation</h3>
+            <p>Stress-test rule updates against existing agent extractions before shipping policy changes.</p>
+          </div>
+          <div class="hairline-cell">
+            <span class="cell-meta mono">Checker: v2-strict Grounding</span>
+            <h3>Evidence-Grounded Decisions</h3>
+            <p>Fail closed with <code>ABSTAIN</code> when an agent cites a policy ID (<code>P1</code>) instead of a factual evidence passage.</p>
+          </div>
+          <div class="hairline-cell">
+            <span class="cell-meta mono">Offline CLI: evidaudit reproduce</span>
+            <h3>Reproducible Benchmark Datasets</h3>
+            <p>Recompute all authorization and FOLIO/LINC replication numbers offline from curated benchmark datasets with zero API calls.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-grid">
+      <div>
+        <strong class="mono">evidaudit</strong>
+        <p style="margin: 8px 0 0;">
+          Open-source regression testing and evidence auditing for AI agents. MIT License.
+        </p>
+        <p style="margin: 8px 0 0;">
+          <a href="llms.txt">llms.txt</a> |
+          <a href="sitemap.xml">sitemap.xml</a> |
+          <a href="https://github.com/SaiTejaMutchi/evidaudit" target="_blank" rel="noopener">GitHub</a>
+        </p>
+      </div>
+      <div>
+        <strong>Developer Docs</strong>
+        <ul class="footer-links">
+          <li><a href="docs/python-quick-start.html">Python Quick Start</a></li>
+          <li><a href="docs/ai-agent-regression-testing.html">AI Agent Regression Testing</a></li>
+          <li><a href="docs/structured-output-validation.html">Structured Output Validation</a></li>
+          <li><a href="docs/policy-transition-testing.html">Policy Transition Testing</a></li>
+          <li><a href="docs/cicd-integration.html">CI/CD Integration</a></li>
+        </ul>
+      </div>
+      <div>
+        <strong>Guides &amp; Research</strong>
+        <ul class="footer-links">
+          <li><a href="docs/authorization-testing.html">AI Authorization Testing</a></li>
+          <li><a href="docs/evidence-validation.html">Evidence Validation</a></li>
+          <li><a href="docs/framework-integrations.html">Framework Integrations</a></li>
+          <li><a href="docs/research.html">Research &amp; Benchmarks</a></li>
+          <li><a href="docs/faq.html">Technical FAQ</a></li>
+        </ul>
+      </div>
+    </div>
+  </footer>
+
+  <script src="app.js"></script>
+</body>
+</html>

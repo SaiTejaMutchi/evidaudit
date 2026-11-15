@@ -1,0 +1,20 @@
+# EvidAudit
+
+> Open-source regression testing for AI agents and LLM decision pipelines. Detect hidden reasoning errors, audit structured evidence, and test whether AI decisions remain safe when policies change.
+
+## Core Links
+- Repository: https://github.com/SaiTejaMutchi/evidaudit
+- Interactive Playground: https://saitejamutchi.github.io/evidaudit/
+- Install: `pip install git+https://github.com/SaiTejaMutchi/evidaudit.git`
+
+## Documentation
+- [AI Agent Regression Testing](https://saitejamutchi.github.io/evidaudit/docs/ai-agent-regression-testing.html): Learn how to regression test AI agents and LLM decision pipelines for concealed semantic errors and policy-transition failures without API keys.
+- [Structured Output Validation](https://saitejamutchi.github.io/evidaudit/docs/structured-output-validation.html): Validate valid JSON and Pydantic LLM outputs against reference evidence to catch semantically wrong fields behind schema-valid responses.
+- [AI Agent Authorization Testing](https://saitejamutchi.github.io/evidaudit/docs/authorization-testing.html): Test AI authorization gates for fail-closed grounding, exact rule-ID override matching, and three-valued abstention semantics.
+- [Policy Transition Testing](https://saitejamutchi.github.io/evidaudit/docs/policy-transition-testing.html): Test whether AI agent decisions remain safe when overrides are revoked or time windows expire, and detect replay-vs-regeneration gaps.
+- [Evidence Validation](https://saitejamutchi.github.io/evidaudit/docs/evidence-validation.html): Audit whether LLM-extracted claims are grounded in factual evidence passages and detect lost uncertainty.
+- [CI/CD & Pytest Integration](https://saitejamutchi.github.io/evidaudit/docs/cicd-integration.html): Run deterministic AI agent policy regression tests in pytest and GitHub Actions without API keys or LLM spend.
+- [Python Quick Start](https://saitejamutchi.github.io/evidaudit/docs/python-quick-start.html): Install EvidAudit in Python and run your first semantic integrity and counterfactual policy test in 60 seconds.
+- [Framework Integrations](https://saitejamutchi.github.io/evidaudit/docs/framework-integrations.html): Integrate EvidAudit semantic integrity assertions with Promptfoo, DeepEval, Pydantic, LangChain, and pytest.
+- [Research Foundation](https://saitejamutchi.github.io/evidaudit/docs/research.html): Scientific continuity connecting IEEE ICTAI 2026 ContractNLI retrieval sufficiency, Apart AI x Epistemics 2026 semantic integrity, and EvidAudit.
+- [Technical FAQ](https://saitejamutchi.github.io/evidaudit/docs/faq.html): Answers to common developer questions on AI agent regression testing, detecting wrong reasoning behind correct answers, and CI integration.

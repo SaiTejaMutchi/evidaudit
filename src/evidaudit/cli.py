@@ -182,7 +182,14 @@ def main(argv: list[str] | None = None) -> int:
     if args.command in ("verify", "verify-ledgers"):
         return run_verify()
     if args.command == "test":
-        res = run_yaml_test_case(args.path)
+        try:
+            res = run_yaml_test_case(args.path)
+        except (FileNotFoundError, ValueError) as exc:
+            if args.json:
+                print(json.dumps({"passed": False, "error": str(exc)}, indent=2))
+            else:
+                print(f"[ERROR] {exc}", file=sys.stderr)
+            return 1
         payload = {
             "name": res.name,
             "passed": res.passed,

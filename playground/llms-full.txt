@@ -1,0 +1,176 @@
+# EvidAudit: Consolidated Technical Documentation
+
+## AI Agent Regression Testing
+URL: https://saitejamutchi.github.io/evidaudit/docs/ai-agent-regression-testing.html
+
+Learn how to regression test AI agents and LLM decision pipelines for concealed semantic errors and policy-transition failures without API keys.
+
+Outcome-only accuracy hides semantic errors when an active override or fallback rule masks a wrong intermediate fact. EvidAudit runs deterministic regression tests over structured agent propositions and policy transitions.
+
+```python
+from evidaudit import Auditor
+
+auditor = Auditor()
+res = auditor.evaluate(
+    propositions={
+        "prerequisites": [{"rule_id": "req_kyc", "prerequisite_satisfied": "TRUE", "evidence_ids": ["E1"]}],
+        "prohibitions": [{"rule_id": "prohib_sanction", "prohibition_applies": "FALSE", "evidence_ids": ["E2"]}],
+        "overrides": [{"rule_id": "ov_waiver", "targets_prohibition": "prohib_sanction", "override_valid": "TRUE", "authority_rank": 3, "evidence_ids": ["E3"]}],
+    },
+    evidence={
+        "packet_ids": {"E1", "E2", "E3"},
+        "reference_decision": "ALLOW",
+        "reference_propositions": {"prerequisites": {"req_kyc": "TRUE"}, "prohibitions": {"prohib_sanction": "TRUE"}, "overrides": {"ov_waiver": "TRUE"}},
+    },
+)
+print(res.concealed_corruption, res.semantic_errors)
+```
+
+## Structured Output Validation
+URL: https://saitejamutchi.github.io/evidaudit/docs/structured-output-validation.html
+
+Validate valid JSON and Pydantic LLM outputs against reference evidence to catch semantically wrong fields behind schema-valid responses.
+
+Schema validators (such as JSON Schema or Pydantic) verify syntax and types, not whether an extracted boolean matches the underlying document. EvidAudit checks every extracted proposition against reference evidence and factual packet IDs.
+
+```python
+from evidaudit import Auditor
+
+res = Auditor().evaluate(
+    propositions={"prerequisites": [{"rule_id": "req_window", "prerequisite_satisfied": "TRUE", "evidence_ids": ["E1"]}], "prohibitions": [], "overrides": []},
+    evidence={"packet_ids": {"E1"}, "reference_decision": "BLOCK", "reference_propositions": {"prerequisites": {"req_window": "FALSE"}}},
+)
+print(res.decision, res.semantic_errors)
+```
+
+## AI Agent Authorization Testing
+URL: https://saitejamutchi.github.io/evidaudit/docs/authorization-testing.html
+
+Test AI authorization gates for fail-closed grounding, exact rule-ID override matching, and three-valued abstention semantics.
+
+EvidAudit enforces fail-closed deterministic checking (v2-strict): policy-only citations (such as P1) are rejected, unknown prohibitions abstain rather than defaulting to false, and overrides require exact rule-ID matching and rank >= 2.
+
+```python
+from evidaudit import evaluate_extraction
+
+res = evaluate_extraction(
+    {"prerequisites": [{"rule_id": "req1", "prerequisite_satisfied": "TRUE", "evidence_ids": ["P1"]}], "prohibitions": [], "overrides": []},
+    valid_packet_ids={"P1", "E1"},
+)
+print(res.decision, res.reasons)  # ABSTAIN ['ungrounded_prereq_true:req1']
+```
+
+## Policy Transition Testing
+URL: https://saitejamutchi.github.io/evidaudit/docs/policy-transition-testing.html
+
+Test whether AI agent decisions remain safe when overrides are revoked or time windows expire, and detect replay-vs-regeneration gaps.
+
+Revoking an executive waiver or advancing an evaluation date past expiry exposes concealed extraction faults. EvidAudit compares frozen-extraction replay against fresh regeneration and verifies single-proposition repairs.
+
+```python
+from evidaudit import Auditor
+
+auditor = Auditor()
+exp = auditor.test_override_revocation(
+    propositions={
+        "prerequisites": [{"rule_id": "req1", "prerequisite_satisfied": "TRUE", "evidence_ids": ["E1"]}],
+        "prohibitions": [{"rule_id": "prohib1", "prohibition_applies": "FALSE", "evidence_ids": ["E2"]}],
+        "overrides": [{"rule_id": "ov1", "targets_prohibition": "prohib1", "override_valid": "TRUE", "authority_rank": 3, "evidence_ids": ["E3"]}],
+    },
+    target_prohibition="prohib1",
+    prohibition_id="prohib1",
+    packet_ids={"E1", "E2", "E3"},
+)
+print(exp.post_transition_decision, exp.repaired_decision)  # ALLOW, BLOCK
+```
+
+## Evidence Validation
+URL: https://saitejamutchi.github.io/evidaudit/docs/evidence-validation.html
+
+Audit whether LLM-extracted claims are grounded in factual evidence passages and detect lost uncertainty.
+
+In our empirical audit of 1,870 strict-checker-correct authorization decisions, 26.2% (490/1,870) consumed corrupted propositions or ungrounded citations, including 51.5% (222/431) of abstentions abstaining for the wrong reason.
+
+```python
+from evidaudit import Auditor
+
+res = Auditor().evaluate(
+    propositions={"prerequisites": [{"rule_id": "req1", "prerequisite_satisfied": "TRUE", "evidence_ids": []}], "prohibitions": [], "overrides": []},
+    evidence={"packet_ids": {"E1"}, "reference_decision": "ALLOW"},
+)
+print(res.decision, res.grounding_errors)  # ABSTAIN ('ungrounded_prereq_true:req1',)
+```
+
+## CI/CD & Pytest Integration
+URL: https://saitejamutchi.github.io/evidaudit/docs/cicd-integration.html
+
+Run deterministic AI agent policy regression tests in pytest and GitHub Actions without API keys or LLM spend.
+
+EvidAudit executes declarative YAML test cases and Python assertions deterministically with zero external API keys, making it suitable for pull-request gates in GitHub Actions and pytest.
+
+```python
+# Run declarative YAML regression tests in CI (zero API keys)
+# evidaudit test examples/payment_expiry.yaml --json
+
+from pathlib import Path
+from evidaudit.yaml_runner import run_yaml_test_case
+
+res = run_yaml_test_case(Path("examples/payment_expiry.yaml"))
+assert res.passed and res.concealed_corruption
+```
+
+## Python Quick Start
+URL: https://saitejamutchi.github.io/evidaudit/docs/python-quick-start.html
+
+Install EvidAudit in Python and run your first semantic integrity and counterfactual policy test in 60 seconds.
+
+Install EvidAudit from GitHub, run the CLI demo, execute declarative YAML policy tests, or call Auditor() directly from Python.
+
+```python
+pip install git+https://github.com/SaiTejaMutchi/evidaudit.git
+evidaudit demo
+evidaudit test examples/payment_expiry.yaml
+evidaudit reproduce
+```
+
+## Framework Integrations
+URL: https://saitejamutchi.github.io/evidaudit/docs/framework-integrations.html
+
+Integrate EvidAudit semantic integrity assertions with Promptfoo, DeepEval, Pydantic, LangChain, and pytest.
+
+EvidAudit provides lightweight adapters for Promptfoo custom Python providers/assertions, DeepEval custom metrics, and Pydantic/LangChain structured outputs without requiring extra runtime dependencies.
+
+```python
+from examples.integrations.deepeval_metric import SemanticIntegrityMetric
+
+metric = SemanticIntegrityMetric()
+# Pass JSON propositions as actual_output and evidence dict as context
+print(metric.__name__)
+```
+
+## Research Foundation
+URL: https://saitejamutchi.github.io/evidaudit/docs/research.html
+
+Scientific continuity connecting IEEE ICTAI 2026 ContractNLI retrieval sufficiency, Apart AI x Epistemics 2026 semantic integrity, and EvidAudit.
+
+EvidAudit operationalizes findings from two connected studies: (1) IEEE ICTAI 2026 ('When Does Retrieval Still Matter?', 2,091 ContractNLI pairs across 123 contracts, showing 82.72% of agentic retrieval expansions did not change final predictions) on evidence availability; and (2) Apart AI x Epistemics 2026 ('Correct Decisions, Wrong Evidence: The Hidden Fragility of AI Decisions Under Policy Change', 2,903 formal parsed authorization traces within 3,104 historical inventory records and 4,972 total local calls, plus 16,380 released LINC/FOLIO traces) on concealed semantic corruption and counterfactual repair.
+
+```python
+# Offline ledger-based reproduction (0 LLM calls, $0.00 spend):
+evidaudit reproduce
+evidaudit reproduce --json
+evidaudit verify
+```
+
+## Technical FAQ
+URL: https://saitejamutchi.github.io/evidaudit/docs/faq.html
+
+Answers to common developer questions on AI agent regression testing, detecting wrong reasoning behind correct answers, and CI integration.
+
+Frequently asked questions covering deterministic semantic auditing, comparing EvidAudit with Promptfoo/DeepEval/OPA/Cedar, YAML test cases, and offline reproducibility.
+
+```python
+# Verify deterministic invariants and ledger statistics offline:
+evidaudit demo
+evidaudit verify
+```

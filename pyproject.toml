@@ -5,7 +5,7 @@ build-backend = "setuptools.build_meta"
 [project]
 name = "evidaudit"
 version = "0.1.0"
-description = "A semantic integrity evaluation toolkit for AI agents and neuro-symbolic decision systems."
+description = "Regression testing and evidence auditing for action-authorizing AI agents."
 readme = "README.md"
 license = {text = "MIT"}
 requires-python = ">=3.10"

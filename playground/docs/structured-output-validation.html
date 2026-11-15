@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Structured Output Validation for LLMs in Python | EvidAudit</title>
+  <meta name="description" content="Validate valid JSON and Pydantic LLM outputs against reference evidence to catch semantically wrong fields behind schema-valid responses." />
+  <link rel="canonical" href="https://saitejamutchi.github.io/evidaudit/docs/structured-output-validation.html" />
+  <meta property="og:type" content="article" />
+  <meta property="og:title" content="Structured Output Validation for LLMs in Python | EvidAudit" />
+  <meta property="og:description" content="Validate valid JSON and Pydantic LLM outputs against reference evidence to catch semantically wrong fields behind schema-valid responses." />
+  <meta property="og:url" content="https://saitejamutchi.github.io/evidaudit/docs/structured-output-validation.html" />
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Structured Output Validation for LLMs in Python | EvidAudit" />
+  <meta name="twitter:description" content="Validate valid JSON and Pydantic LLM outputs against reference evidence to catch semantically wrong fields behind schema-valid responses." />
+  <script type="application/ld+json">{
+  "@context": "https://schema.org",
+  "@type": "SoftwareSourceCode",
+  "name": "EvidAudit",
+  "description": "Validate valid JSON and Pydantic LLM outputs against reference evidence to catch semantically wrong fields behind schema-valid responses.",
+  "codeRepository": "https://github.com/SaiTejaMutchi/evidaudit",
+  "programmingLanguage": "Python",
+  "license": "https://opensource.org/licenses/MIT",
+  "url": "https://saitejamutchi.github.io/evidaudit/docs/structured-output-validation.html"
+}</script>
+  <script>
+    (function () {
+      const saved = localStorage.getItem("evidaudit-theme");
+      const preferred = window.matchMedia && window.matchMedia("(prefers-color-scheme: light)").matches ? "light" : "dark";
+      document.documentElement.setAttribute("data-theme", saved || preferred);
+    })();
+  </script>
+  <link rel="stylesheet" href="../styles.css" />
+</head>
+<body>
+  <nav class="site-nav" aria-label="Primary Navigation">
+    <div class="container nav-inner">
+      <a class="brand" href="https://saitejamutchi.github.io/evidaudit/">
+        <span class="mono">evidaudit</span>
+        <span class="brand-version mono">v0.1.0</span>
+      </a>
+      <div id="nav-links" class="nav-links">
+        <a href="https://saitejamutchi.github.io/evidaudit/#playground">Playground</a>
+        <a href="python-quick-start.html">Quick Start</a>
+        <a href="research.html">Research</a>
+        <a href="faq.html">FAQ</a>
+      </div>
+      <div class="nav-actions">
+        <button id="theme-toggle" class="icon-btn" type="button" aria-label="Toggle light and dark theme">Light Mode</button>
+        <a class="icon-btn" href="https://github.com/SaiTejaMutchi/evidaudit" target="_blank" rel="noopener">GitHub</a>
+        <button id="mobile-menu-btn" class="icon-btn mobile-menu-btn" type="button" aria-expanded="false" aria-controls="nav-links">Menu</button>
+      </div>
+    </div>
+  </nav>
+  <header class="hero" style="padding: 36px 0 28px;">
+    <div class="container">
+      <h1>Structured Output Validation</h1>
+      <p class="subtitle">Validate valid JSON and Pydantic LLM outputs against reference evidence to catch semantically wrong fields behind schema-valid responses.</p>
+    </div>
+  </header>
+  <main class="container" style="padding-top: 24px;">
+    <div class="card">
+      <p>Schema validators (such as JSON Schema or Pydantic) verify syntax and types, not whether an extracted boolean matches the underlying document. EvidAudit checks every extracted proposition against reference evidence and factual packet IDs.</p>
+      <h2>Working Example</h2>
+      <pre class="code-box">from evidaudit import Auditor
+
+res = Auditor().evaluate(
+    propositions={&quot;prerequisites&quot;: [{&quot;rule_id&quot;: &quot;req_window&quot;, &quot;prerequisite_satisfied&quot;: &quot;TRUE&quot;, &quot;evidence_ids&quot;: [&quot;E1&quot;]}], &quot;prohibitions&quot;: [], &quot;overrides&quot;: []},
+    evidence={&quot;packet_ids&quot;: {&quot;E1&quot;}, &quot;reference_decision&quot;: &quot;BLOCK&quot;, &quot;reference_propositions&quot;: {&quot;prerequisites&quot;: {&quot;req_window&quot;: &quot;FALSE&quot;}}},
+)
+print(res.decision, res.semantic_errors)</pre>
+      
+      <h3>Documentation</h3>
+      <p style="font-size:14px;"><a href="https://saitejamutchi.github.io/evidaudit/docs/ai-agent-regression-testing.html">AI Agent Regression Testing</a> | <a href="https://saitejamutchi.github.io/evidaudit/docs/structured-output-validation.html">Structured Output Validation</a> | <a href="https://saitejamutchi.github.io/evidaudit/docs/authorization-testing.html">AI Agent Authorization Testing</a> | <a href="https://saitejamutchi.github.io/evidaudit/docs/policy-transition-testing.html">Policy Transition Testing</a> | <a href="https://saitejamutchi.github.io/evidaudit/docs/evidence-validation.html">Evidence Validation</a> | <a href="https://saitejamutchi.github.io/evidaudit/docs/cicd-integration.html">CI/CD</a> | <a href="https://saitejamutchi.github.io/evidaudit/docs/python-quick-start.html">Quick Start</a> | <a href="https://saitejamutchi.github.io/evidaudit/docs/framework-integrations.html">Integrations</a> | <a href="https://saitejamutchi.github.io/evidaudit/docs/research.html">Research</a> | <a href="https://saitejamutchi.github.io/evidaudit/docs/faq.html">FAQ</a></p>
+    </div>
+  </main>
+  <footer class="footer container">
+    <p><strong>EvidAudit</strong> | <a href="https://github.com/SaiTejaMutchi/evidaudit">GitHub</a> | <a href="https://saitejamutchi.github.io/evidaudit/llms.txt">llms.txt</a> | MIT License</p>
+  </footer>
+  <script src="../app.js"></script>
+</body>
+</html>

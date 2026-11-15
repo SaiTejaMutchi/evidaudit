@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Technical FAQ | EvidAudit</title>
+  <meta name="description" content="Answers to common developer questions on AI agent regression testing, detecting wrong reasoning behind correct answers, and CI integration." />
+  <link rel="canonical" href="https://saitejamutchi.github.io/evidaudit/docs/faq.html" />
+  <meta property="og:type" content="article" />
+  <meta property="og:title" content="Technical FAQ | EvidAudit" />
+  <meta property="og:description" content="Answers to common developer questions on AI agent regression testing, detecting wrong reasoning behind correct answers, and CI integration." />
+  <meta property="og:url" content="https://saitejamutchi.github.io/evidaudit/docs/faq.html" />
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Technical FAQ | EvidAudit" />
+  <meta name="twitter:description" content="Answers to common developer questions on AI agent regression testing, detecting wrong reasoning behind correct answers, and CI integration." />
+  <script type="application/ld+json">{
+  "@context": "https://schema.org",
+  "@type": "SoftwareSourceCode",
+  "name": "EvidAudit",
+  "description": "Answers to common developer questions on AI agent regression testing, detecting wrong reasoning behind correct answers, and CI integration.",
+  "codeRepository": "https://github.com/SaiTejaMutchi/evidaudit",
+  "programmingLanguage": "Python",
+  "license": "https://opensource.org/licenses/MIT",
+  "url": "https://saitejamutchi.github.io/evidaudit/docs/faq.html"
+}</script>
+  <script>
+    (function () {
+      const saved = localStorage.getItem("evidaudit-theme");
+      const preferred = window.matchMedia && window.matchMedia("(prefers-color-scheme: light)").matches ? "light" : "dark";
+      document.documentElement.setAttribute("data-theme", saved || preferred);
+    })();
+  </script>
+  <link rel="stylesheet" href="../styles.css" />
+</head>
+<body>
+  <nav class="site-nav" aria-label="Primary Navigation">
+    <div class="container nav-inner">
+      <a class="brand" href="https://saitejamutchi.github.io/evidaudit/">
+        <span class="mono">evidaudit</span>
+        <span class="brand-version mono">v0.1.0</span>
+      </a>
+      <div id="nav-links" class="nav-links">
+        <a href="https://saitejamutchi.github.io/evidaudit/#playground">Playground</a>
+        <a href="python-quick-start.html">Quick Start</a>
+        <a href="research.html">Research</a>
+        <a href="faq.html">FAQ</a>
+      </div>
+      <div class="nav-actions">
+        <button id="theme-toggle" class="icon-btn" type="button" aria-label="Toggle light and dark theme">Light Mode</button>
+        <a class="icon-btn" href="https://github.com/SaiTejaMutchi/evidaudit" target="_blank" rel="noopener">GitHub</a>
+        <button id="mobile-menu-btn" class="icon-btn mobile-menu-btn" type="button" aria-expanded="false" aria-controls="nav-links">Menu</button>
+      </div>
+    </div>
+  </nav>
+  <header class="hero" style="padding: 36px 0 28px;">
+    <div class="container">
+      <h1>Technical FAQ</h1>
+      <p class="subtitle">Answers to common developer questions on AI agent regression testing, detecting wrong reasoning behind correct answers, and CI integration.</p>
+    </div>
+  </header>
+  <main class="container" style="padding-top: 24px;">
+    <div class="card">
+      <p>Frequently asked questions covering deterministic semantic auditing, comparing EvidAudit with Promptfoo/DeepEval/OPA/Cedar, YAML test cases, and offline reproducibility.</p>
+      <h2>Working Example</h2>
+      <pre class="code-box"># Verify deterministic invariants and ledger statistics offline:
+evidaudit demo
+evidaudit verify</pre>
+      
+<h2>Frequently Asked Questions</h2>
+<h3>How can I regression test an AI agent?</h3>
+<p>Log the agent's extracted structured propositions (prerequisites, prohibitions, overrides, and evidence IDs) and run <code>evidaudit test &lt;case.yaml&gt;</code> or <code>Auditor().evaluate(...)</code> in CI alongside counterfactual override-revocation checks.</p>
+<h3>How can I detect wrong reasoning behind a correct LLM answer?</h3>
+<p>Compare extracted intermediate propositions against reference evidence via <code>Auditor().evaluate(...)</code>. When <code>result.decision_correct</code> is <code>True</code> and <code>result.semantic_errors</code> is non-empty, <code>result.concealed_corruption</code> flags the masked fault.</p>
+<h3>How can I validate structured evidence from an LLM?</h3>
+<p>Pass valid factual passage IDs in <code>evidence={"packet_ids": ...}</code>. EvidAudit rejects ungrounded claims and policy-only citations (<code>P1</code>) fail-closed.</p>
+<h3>How do I test an AI authorization decision after a policy change?</h3>
+<p>Use <code>Auditor().test_override_revocation(...)</code> or <code>Auditor().compare_replay_vs_regeneration(...)</code> to test whether revoking an exception or updating an evaluation date turns a masked extraction error into an unsafe <code>ALLOW</code>.</p>
+<h3>How can I run deterministic AI evaluations without an API key?</h3>
+<p>EvidAudit's core checker, declarative oracle, YAML runner, and ledger reproduction require only the Python standard library and run offline with zero API keys.</p>
+<h3>How can I integrate EvidAudit with pytest or an existing evaluation framework?</h3>
+<p>Use <code>pytest</code> assertions directly on <code>Auditor().evaluate(...)</code>, or use the shipped adapters in <code>examples/integrations/</code> for Promptfoo, DeepEval, and Pydantic/LangChain.</p>
+
+      <h3>Documentation</h3>
+      <p style="font-size:14px;"><a href="https://saitejamutchi.github.io/evidaudit/docs/ai-agent-regression-testing.html">AI Agent Regression Testing</a> | <a href="https://saitejamutchi.github.io/evidaudit/docs/structured-output-validation.html">Structured Output Validation</a> | <a href="https://saitejamutchi.github.io/evidaudit/docs/authorization-testing.html">AI Agent Authorization Testing</a> | <a href="https://saitejamutchi.github.io/evidaudit/docs/policy-transition-testing.html">Policy Transition Testing</a> | <a href="https://saitejamutchi.github.io/evidaudit/docs/evidence-validation.html">Evidence Validation</a> | <a href="https://saitejamutchi.github.io/evidaudit/docs/cicd-integration.html">CI/CD</a> | <a href="https://saitejamutchi.github.io/evidaudit/docs/python-quick-start.html">Quick Start</a> | <a href="https://saitejamutchi.github.io/evidaudit/docs/framework-integrations.html">Integrations</a> | <a href="https://saitejamutchi.github.io/evidaudit/docs/research.html">Research</a> | <a href="https://saitejamutchi.github.io/evidaudit/docs/faq.html">FAQ</a></p>
+    </div>
+  </main>
+  <footer class="footer container">
+    <p><strong>EvidAudit</strong> | <a href="https://github.com/SaiTejaMutchi/evidaudit">GitHub</a> | <a href="https://saitejamutchi.github.io/evidaudit/llms.txt">llms.txt</a> | MIT License</p>
+  </footer>
+  <script src="../app.js"></script>
+</body>
+</html>

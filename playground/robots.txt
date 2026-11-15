@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://saitejamutchi.github.io/evidaudit/sitemap.xml

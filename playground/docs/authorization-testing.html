@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AI Agent Authorization Testing | EvidAudit</title>
+  <meta name="description" content="Test AI authorization gates for fail-closed grounding, exact rule-ID override matching, and three-valued abstention semantics." />
+  <link rel="canonical" href="https://saitejamutchi.github.io/evidaudit/docs/authorization-testing.html" />
+  <meta property="og:type" content="article" />
+  <meta property="og:title" content="AI Agent Authorization Testing | EvidAudit" />
+  <meta property="og:description" content="Test AI authorization gates for fail-closed grounding, exact rule-ID override matching, and three-valued abstention semantics." />
+  <meta property="og:url" content="https://saitejamutchi.github.io/evidaudit/docs/authorization-testing.html" />
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="AI Agent Authorization Testing | EvidAudit" />
+  <meta name="twitter:description" content="Test AI authorization gates for fail-closed grounding, exact rule-ID override matching, and three-valued abstention semantics." />
+  <script type="application/ld+json">{
+  "@context": "https://schema.org",
+  "@type": "SoftwareSourceCode",
+  "name": "EvidAudit",
+  "description": "Test AI authorization gates for fail-closed grounding, exact rule-ID override matching, and three-valued abstention semantics.",
+  "codeRepository": "https://github.com/SaiTejaMutchi/evidaudit",
+  "programmingLanguage": "Python",
+  "license": "https://opensource.org/licenses/MIT",
+  "url": "https://saitejamutchi.github.io/evidaudit/docs/authorization-testing.html"
+}</script>
+  <script>
+    (function () {
+      const saved = localStorage.getItem("evidaudit-theme");
+      const preferred = window.matchMedia && window.matchMedia("(prefers-color-scheme: light)").matches ? "light" : "dark";
+      document.documentElement.setAttribute("data-theme", saved || preferred);
+    })();
+  </script>
+  <link rel="stylesheet" href="../styles.css" />
+</head>
+<body>
+  <nav class="site-nav" aria-label="Primary Navigation">
+    <div class="container nav-inner">
+      <a class="brand" href="https://saitejamutchi.github.io/evidaudit/">
+        <span class="mono">evidaudit</span>
+        <span class="brand-version mono">v0.1.0</span>
+      </a>
+      <div id="nav-links" class="nav-links">
+        <a href="https://saitejamutchi.github.io/evidaudit/#playground">Playground</a>
+        <a href="python-quick-start.html">Quick Start</a>
+        <a href="research.html">Research</a>
+        <a href="faq.html">FAQ</a>
+      </div>
+      <div class="nav-actions">
+        <button id="theme-toggle" class="icon-btn" type="button" aria-label="Toggle light and dark theme">Light Mode</button>
+        <a class="icon-btn" href="https://github.com/SaiTejaMutchi/evidaudit" target="_blank" rel="noopener">GitHub</a>
+        <button id="mobile-menu-btn" class="icon-btn mobile-menu-btn" type="button" aria-expanded="false" aria-controls="nav-links">Menu</button>
+      </div>
+    </div>
+  </nav>
+  <header class="hero" style="padding: 36px 0 28px;">
+    <div class="container">
+      <h1>AI Agent Authorization Testing</h1>
+      <p class="subtitle">Test AI authorization gates for fail-closed grounding, exact rule-ID override matching, and three-valued abstention semantics.</p>
+    </div>
+  </header>
+  <main class="container" style="padding-top: 24px;">
+    <div class="card">
+      <p>EvidAudit enforces fail-closed deterministic checking (v2-strict): policy-only citations (such as P1) are rejected, unknown prohibitions abstain rather than defaulting to false, and overrides require exact rule-ID matching and rank &gt;= 2.</p>
+      <h2>Working Example</h2>
+      <pre class="code-box">from evidaudit import evaluate_extraction
+
+res = evaluate_extraction(
+    {&quot;prerequisites&quot;: [{&quot;rule_id&quot;: &quot;req1&quot;, &quot;prerequisite_satisfied&quot;: &quot;TRUE&quot;, &quot;evidence_ids&quot;: [&quot;P1&quot;]}], &quot;prohibitions&quot;: [], &quot;overrides&quot;: []},
+    valid_packet_ids={&quot;P1&quot;, &quot;E1&quot;},
+)
+print(res.decision, res.reasons)  # ABSTAIN [&#x27;ungrounded_prereq_true:req1&#x27;]</pre>
+      
+      <h3>Documentation</h3>
+      <p style="font-size:14px;"><a href="https://saitejamutchi.github.io/evidaudit/docs/ai-agent-regression-testing.html">AI Agent Regression Testing</a> | <a href="https://saitejamutchi.github.io/evidaudit/docs/structured-output-validation.html">Structured Output Validation</a> | <a href="https://saitejamutchi.github.io/evidaudit/docs/authorization-testing.html">AI Agent Authorization Testing</a> | <a href="https://saitejamutchi.github.io/evidaudit/docs/policy-transition-testing.html">Policy Transition Testing</a> | <a href="https://saitejamutchi.github.io/evidaudit/docs/evidence-validation.html">Evidence Validation</a> | <a href="https://saitejamutchi.github.io/evidaudit/docs/cicd-integration.html">CI/CD</a> | <a href="https://saitejamutchi.github.io/evidaudit/docs/python-quick-start.html">Quick Start</a> | <a href="https://saitejamutchi.github.io/evidaudit/docs/framework-integrations.html">Integrations</a> | <a href="https://saitejamutchi.github.io/evidaudit/docs/research.html">Research</a> | <a href="https://saitejamutchi.github.io/evidaudit/docs/faq.html">FAQ</a></p>
+    </div>
+  </main>
+  <footer class="footer container">
+    <p><strong>EvidAudit</strong> | <a href="https://github.com/SaiTejaMutchi/evidaudit">GitHub</a> | <a href="https://saitejamutchi.github.io/evidaudit/llms.txt">llms.txt</a> | MIT License</p>
+  </footer>
+  <script src="../app.js"></script>
+</body>
+</html>
