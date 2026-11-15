@@ -1,0 +1,38 @@
+name: Revoked procurement exception masks corrupted prohibition
+variant: v2-strict
+expected_decision: ALLOW
+expected_concealed_corruption: true
+
+evidence:
+  packet_ids: [E1, E2, E3]
+  reference_decision: ALLOW
+  reference_propositions:
+    prerequisites:
+      req_vendor_kyc: TRUE
+    prohibitions:
+      prohib_sanctioned_country: TRUE
+    overrides:
+      ov_executive_waiver: TRUE
+
+propositions:
+  prerequisites:
+    - rule_id: req_vendor_kyc
+      prerequisite_satisfied: TRUE
+      evidence_ids: [E1]
+  prohibitions:
+    - rule_id: prohib_sanctioned_country
+      prohibition_applies: FALSE
+      evidence_ids: [E2]
+  overrides:
+    - rule_id: ov_executive_waiver
+      targets_prohibition: prohib_sanctioned_country
+      override_valid: TRUE
+      authority_rank: 3
+      evidence_ids: [E3]
+
+transitions:
+  - type: override_revocation
+    target_prohibition: prohib_sanctioned_country
+    prohibition_id: prohib_sanctioned_country
+    expected_post_transition_decision: ALLOW
+    expected_repaired_decision: BLOCK
