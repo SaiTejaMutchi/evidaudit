@@ -1,0 +1,107 @@
+model,example_id,story_id,eligible,intervention,r_orig,g_orig,r_cf,g_cf,rep_orig,rep_cf,outcome,ambig_ref,note
+gpt-4-0613,EX 10,S52,YES,PREMISE_DELETION_P1,True,True,Uncertain,True,,,DELETION_DISAGREEMENT,False,Generic premise-deletion disagreement
+gpt-4-0613,EX 18,S49,YES,PREMISE_DELETION_P4,False,False,Uncertain,False,,,DELETION_DISAGREEMENT,True,Generic premise-deletion disagreement
+gpt-4-0613,EX 23,S08,NO,NONE,ProverError:RecursionError,Uncertain,,,,,INELIGIBLE_PROVER_MISMATCH_OR_TIMEOUT,False,Retained ineligible case
+gpt-4-0613,EX 27,S63,NO,NONE,ParseError:LogicalExpressionException,True,,,,,INELIGIBLE_PROVER_MISMATCH_OR_TIMEOUT,False,Retained ineligible case
+gpt-4-0613,EX 31,S37,NO,NONE,True,Timeout,,,,,INELIGIBLE_PROVER_MISMATCH_OR_TIMEOUT,False,Retained ineligible case
+gpt-4-0613,EX 33,S34,NO,NONE,ProverError:RecursionError,ProverError:RecursionError,,,,,INELIGIBLE_PROVER_MISMATCH_OR_TIMEOUT,False,Retained ineligible case
+gpt-4-0613,EX 40,S14,YES,PREMISE_DELETION_P1,True,True,True,Uncertain,,,DELETION_DISAGREEMENT,True,Generic premise-deletion disagreement
+gpt-4-0613,EX 47,S19,YES,PREMISE_DELETION_P2,False,False,Uncertain,False,,,DELETION_DISAGREEMENT,True,Generic premise-deletion disagreement
+gpt-4-0613,EX 53,S02,YES,PREMISE_DELETION_P1,False,False,Uncertain,False,,,DELETION_DISAGREEMENT,False,Generic premise-deletion disagreement
+gpt-4-0613,EX 66,S07,NO,NONE,False,Uncertain,,,,,INELIGIBLE_PROVER_MISMATCH_OR_TIMEOUT,False,Retained ineligible case
+gpt-4-0613,EX 73,S63,NO,NONE,ParseError:LogicalExpressionException,True,,,,,INELIGIBLE_PROVER_MISMATCH_OR_TIMEOUT,False,Retained ineligible case
+gpt-4-0613,EX 77,S23,YES,PREMISE_DELETION_P1,False,False,Uncertain,False,,,DELETION_DISAGREEMENT,False,Generic premise-deletion disagreement
+gpt-4-0613,EX 78,S40,YES,PREMISE_DELETION_P3,True,True,Uncertain,True,,,DELETION_DISAGREEMENT,False,Generic premise-deletion disagreement
+gpt-4-0613,EX 90,S19,YES,PREMISE_DELETION_P3,True,True,Uncertain,True,,,DELETION_DISAGREEMENT,True,Generic premise-deletion disagreement
+gpt-4-0613,EX 92,S08,NO,NONE,Timeout,True,,,,,INELIGIBLE_PROVER_MISMATCH_OR_TIMEOUT,False,Retained ineligible case
+gpt-4-0613,EX 109,S02,NO,NONE,True,Timeout,,,,,INELIGIBLE_PROVER_MISMATCH_OR_TIMEOUT,False,Retained ineligible case
+gpt-4-0613,EX 119,S06,NO,NONE,ProverError:RecursionError,ProverError:RecursionError,,,,,INELIGIBLE_PROVER_MISMATCH_OR_TIMEOUT,False,Retained ineligible case
+gpt-4-0613,EX 123,S25,NO,NONE,Timeout,ProverError:RecursionError,,,,,INELIGIBLE_PROVER_MISMATCH_OR_TIMEOUT,False,Retained ineligible case
+gpt-4-0613,EX 130,S54,NO,NONE,True,Timeout,,,,,INELIGIBLE_PROVER_MISMATCH_OR_TIMEOUT,False,Retained ineligible case
+gpt-4-0613,EX 132,S28,NO,NONE,Timeout,True,,,,,INELIGIBLE_PROVER_MISMATCH_OR_TIMEOUT,False,Retained ineligible case
+gpt-4-0613,EX 136,S02,NO,NONE,Uncertain,Timeout,,,,,INELIGIBLE_PROVER_MISMATCH_OR_TIMEOUT,False,Retained ineligible case
+gpt-4-0613,EX 142,S06,NO,NONE,ProverError:RecursionError,ProverError:RecursionError,,,,,INELIGIBLE_PROVER_MISMATCH_OR_TIMEOUT,False,Retained ineligible case
+gpt-4-0613,EX 153,S63,NO,NONE,ParseError:LogicalExpressionException,Uncertain,,,,,INELIGIBLE_PROVER_MISMATCH_OR_TIMEOUT,False,Retained ineligible case
+gpt-4-0613,EX 159,S60,NO,NONE,Timeout,Timeout,,,,,INELIGIBLE_PROVER_MISMATCH_OR_TIMEOUT,False,Retained ineligible case
+gpt-4-0613,EX 162,S60,NO,NONE,Timeout,Timeout,,,,,INELIGIBLE_PROVER_MISMATCH_OR_TIMEOUT,False,Retained ineligible case
+gpt-4-0613,EX 176,S23,YES,PREMISE_DELETION_P1,True,True,Uncertain,True,,,DELETION_DISAGREEMENT,False,Generic premise-deletion disagreement
+gpt-3.5-turbo-16k-0613,EX 10,S52,YES,PREMISE_DELETION_P1,True,True,Uncertain,True,,,DELETION_DISAGREEMENT,False,Generic premise-deletion disagreement
+gpt-3.5-turbo-16k-0613,EX 13,S36,YES,PREMISE_DELETION_P2,False,False,False,Uncertain,,,DELETION_DISAGREEMENT,False,Generic premise-deletion disagreement
+gpt-3.5-turbo-16k-0613,EX 18,S49,YES,PREMISE_DELETION_P4,False,False,Uncertain,False,,,DELETION_DISAGREEMENT,True,Generic premise-deletion disagreement
+gpt-3.5-turbo-16k-0613,EX 23,S08,NO,NONE,ProverError:RecursionError,Uncertain,,,,,INELIGIBLE_PROVER_MISMATCH_OR_TIMEOUT,False,Retained ineligible case
+gpt-3.5-turbo-16k-0613,EX 27,S63,NO,NONE,ParseError:LogicalExpressionException,True,,,,,INELIGIBLE_PROVER_MISMATCH_OR_TIMEOUT,False,Retained ineligible case
+gpt-3.5-turbo-16k-0613,EX 28,S35,NO,NONE,True,Uncertain,,,,,INELIGIBLE_PROVER_MISMATCH_OR_TIMEOUT,False,Retained ineligible case
+gpt-3.5-turbo-16k-0613,EX 29,S35,NO,NONE,Uncertain,Timeout,,,,,INELIGIBLE_PROVER_MISMATCH_OR_TIMEOUT,False,Retained ineligible case
+gpt-3.5-turbo-16k-0613,EX 31,S37,YES,PREMISE_DELETION_P6,True,True,Uncertain,True,,,DELETION_DISAGREEMENT,True,Generic premise-deletion disagreement
+gpt-3.5-turbo-16k-0613,EX 33,S34,NO,NONE,ProverError:RecursionError,ProverError:RecursionError,,,,,INELIGIBLE_PROVER_MISMATCH_OR_TIMEOUT,False,Retained ineligible case
+gpt-3.5-turbo-16k-0613,EX 40,S14,YES,PREMISE_DELETION_P1,True,True,True,Uncertain,,,DELETION_DISAGREEMENT,True,Generic premise-deletion disagreement
+gpt-3.5-turbo-16k-0613,EX 53,S02,YES,PREMISE_DELETION_P1,False,False,Uncertain,False,,,DELETION_DISAGREEMENT,False,Generic premise-deletion disagreement
+gpt-3.5-turbo-16k-0613,EX 73,S63,NO,NONE,ParseError:LogicalExpressionException,True,,,,,INELIGIBLE_PROVER_MISMATCH_OR_TIMEOUT,False,Retained ineligible case
+gpt-3.5-turbo-16k-0613,EX 77,S23,YES,PREMISE_DELETION_P1,False,False,Uncertain,False,,,DELETION_DISAGREEMENT,False,Generic premise-deletion disagreement
+gpt-3.5-turbo-16k-0613,EX 78,S40,YES,PREMISE_DELETION_P3,True,True,Uncertain,True,,,DELETION_DISAGREEMENT,False,Generic premise-deletion disagreement
+gpt-3.5-turbo-16k-0613,EX 82,S35,NO,NONE,False,Uncertain,,,,,INELIGIBLE_PROVER_MISMATCH_OR_TIMEOUT,False,Retained ineligible case
+gpt-3.5-turbo-16k-0613,EX 89,S24,YES,PREMISE_DELETION_P1,True,True,Uncertain,True,,,DELETION_DISAGREEMENT,False,Generic premise-deletion disagreement
+gpt-3.5-turbo-16k-0613,EX 92,S08,NO,NONE,Timeout,True,,,,,INELIGIBLE_PROVER_MISMATCH_OR_TIMEOUT,False,Retained ineligible case
+gpt-3.5-turbo-16k-0613,EX 96,S08,NO,NONE,ProverError:RecursionError,False,,,,,INELIGIBLE_PROVER_MISMATCH_OR_TIMEOUT,False,Retained ineligible case
+gpt-3.5-turbo-16k-0613,EX 106,S52,NO,NONE,False,Timeout,,,,,INELIGIBLE_PROVER_MISMATCH_OR_TIMEOUT,False,Retained ineligible case
+gpt-3.5-turbo-16k-0613,EX 109,S02,YES,PREMISE_DELETION_P1,True,True,Uncertain,True,,,DELETION_DISAGREEMENT,False,Generic premise-deletion disagreement
+gpt-3.5-turbo-16k-0613,EX 119,S06,NO,NONE,ProverError:RecursionError,ProverError:RecursionError,,,,,INELIGIBLE_PROVER_MISMATCH_OR_TIMEOUT,False,Retained ineligible case
+gpt-3.5-turbo-16k-0613,EX 123,S25,NO,NONE,Timeout,ProverError:RecursionError,,,,,INELIGIBLE_PROVER_MISMATCH_OR_TIMEOUT,False,Retained ineligible case
+gpt-3.5-turbo-16k-0613,EX 139,S19,NO,NONE,Uncertain,ProverError:RecursionError,,,,,INELIGIBLE_PROVER_MISMATCH_OR_TIMEOUT,False,Retained ineligible case
+gpt-3.5-turbo-16k-0613,EX 142,S06,NO,NONE,ProverError:RecursionError,Timeout,,,,,INELIGIBLE_PROVER_MISMATCH_OR_TIMEOUT,False,Retained ineligible case
+gpt-3.5-turbo-16k-0613,EX 153,S63,NO,NONE,ParseError:LogicalExpressionException,Uncertain,,,,,INELIGIBLE_PROVER_MISMATCH_OR_TIMEOUT,False,Retained ineligible case
+gpt-3.5-turbo-16k-0613,EX 157,S52,NO,NONE,Uncertain,Timeout,,,,,INELIGIBLE_PROVER_MISMATCH_OR_TIMEOUT,False,Retained ineligible case
+gpt-3.5-turbo-16k-0613,EX 171,S19,NO,NONE,True,Timeout,,,,,INELIGIBLE_PROVER_MISMATCH_OR_TIMEOUT,False,Retained ineligible case
+starcoderplus,EX 1,S26,NO,NONE,Uncertain,ProverError:RecursionError,,,,,INELIGIBLE_PROVER_MISMATCH_OR_TIMEOUT,False,Retained ineligible case
+starcoderplus,EX 6,S53,NO,NONE,Uncertain,ProverError:RecursionError,,,,,INELIGIBLE_PROVER_MISMATCH_OR_TIMEOUT,False,Retained ineligible case
+starcoderplus,EX 8,S12,NO,NONE,Uncertain,Timeout,,,,,INELIGIBLE_PROVER_MISMATCH_OR_TIMEOUT,False,Retained ineligible case
+starcoderplus,EX 10,S52,YES,PREMISE_DELETION_P1,True,True,Uncertain,True,,,DELETION_DISAGREEMENT,False,Generic premise-deletion disagreement
+starcoderplus,EX 18,S49,YES,PREMISE_DELETION_P4,False,False,Uncertain,False,,,DELETION_DISAGREEMENT,True,Generic premise-deletion disagreement
+starcoderplus,EX 19,S64,NO,NONE,True,Uncertain,,,,,INELIGIBLE_PROVER_MISMATCH_OR_TIMEOUT,False,Retained ineligible case
+starcoderplus,EX 20,S62,NO,NONE,Uncertain,ProverError:RecursionError,,,,,INELIGIBLE_PROVER_MISMATCH_OR_TIMEOUT,False,Retained ineligible case
+starcoderplus,EX 22,S26,NO,NONE,Uncertain,ProverError:RecursionError,,,,,INELIGIBLE_PROVER_MISMATCH_OR_TIMEOUT,False,Retained ineligible case
+starcoderplus,EX 23,S08,NO,NONE,ProverError:RecursionError,Uncertain,,,,,INELIGIBLE_PROVER_MISMATCH_OR_TIMEOUT,False,Retained ineligible case
+starcoderplus,EX 27,S63,NO,NONE,ParseError:LogicalExpressionException,True,,,,,INELIGIBLE_PROVER_MISMATCH_OR_TIMEOUT,False,Retained ineligible case
+starcoderplus,EX 28,S35,NO,NONE,True,ProverError:RecursionError,,,,,INELIGIBLE_PROVER_MISMATCH_OR_TIMEOUT,False,Retained ineligible case
+starcoderplus,EX 31,S37,YES,PREMISE_DELETION_P6,True,True,Uncertain,True,,,DELETION_DISAGREEMENT,True,Generic premise-deletion disagreement
+starcoderplus,EX 32,S45,NO,NONE,Uncertain,Timeout,,,,,INELIGIBLE_PROVER_MISMATCH_OR_TIMEOUT,False,Retained ineligible case
+starcoderplus,EX 40,S14,YES,PREMISE_DELETION_P1,True,True,True,Uncertain,,,DELETION_DISAGREEMENT,True,Generic premise-deletion disagreement
+starcoderplus,EX 47,S19,YES,PREMISE_DELETION_P2,False,False,Uncertain,False,,,DELETION_DISAGREEMENT,True,Generic premise-deletion disagreement
+starcoderplus,EX 64,S26,NO,NONE,True,ProverError:AttributeError,,,,,INELIGIBLE_PROVER_MISMATCH_OR_TIMEOUT,False,Retained ineligible case
+starcoderplus,EX 66,S07,NO,NONE,False,ProverError:RecursionError,,,,,INELIGIBLE_PROVER_MISMATCH_OR_TIMEOUT,False,Retained ineligible case
+starcoderplus,EX 73,S63,NO,NONE,ParseError:LogicalExpressionException,True,,,,,INELIGIBLE_PROVER_MISMATCH_OR_TIMEOUT,False,Retained ineligible case
+starcoderplus,EX 78,S40,YES,PREMISE_DELETION_P1,True,True,Uncertain,True,,,DELETION_DISAGREEMENT,False,Generic premise-deletion disagreement
+starcoderplus,EX 81,S01,NO,NONE,True,Uncertain,,,,,INELIGIBLE_PROVER_MISMATCH_OR_TIMEOUT,False,Retained ineligible case
+starcoderplus,EX 90,S19,NO,NONE,True,Timeout,,,,,INELIGIBLE_PROVER_MISMATCH_OR_TIMEOUT,False,Retained ineligible case
+starcoderplus,EX 92,S08,NO,NONE,Timeout,True,,,,,INELIGIBLE_PROVER_MISMATCH_OR_TIMEOUT,False,Retained ineligible case
+starcoderplus,EX 101,S44,YES,PREMISE_DELETION_P3,True,True,True,Uncertain,,,DELETION_DISAGREEMENT,True,Generic premise-deletion disagreement
+starcoderplus,EX 102,S56,NO,NONE,False,Uncertain,,,,,INELIGIBLE_PROVER_MISMATCH_OR_TIMEOUT,False,Retained ineligible case
+starcoderplus,EX 109,S02,YES,PREMISE_DELETION_P1,True,True,Uncertain,True,,,DELETION_DISAGREEMENT,False,Generic premise-deletion disagreement
+starcoderplus,EX 116,S39,NO,NONE,True,Uncertain,,,,,INELIGIBLE_PROVER_MISMATCH_OR_TIMEOUT,False,Retained ineligible case
+starcoderplus,EX 119,S06,NO,NONE,ProverError:RecursionError,ProverError:RecursionError,,,,,INELIGIBLE_PROVER_MISMATCH_OR_TIMEOUT,False,Retained ineligible case
+starcoderplus,EX 121,S60,NO,NONE,Timeout,True,,,,,INELIGIBLE_PROVER_MISMATCH_OR_TIMEOUT,False,Retained ineligible case
+starcoderplus,EX 123,S25,NO,NONE,Timeout,ProverError:RecursionError,,,,,INELIGIBLE_PROVER_MISMATCH_OR_TIMEOUT,False,Retained ineligible case
+starcoderplus,EX 140,S07,YES,PREMISE_DELETION_P2,False,False,Uncertain,False,,,DELETION_DISAGREEMENT,False,Generic premise-deletion disagreement
+starcoderplus,EX 147,S17,NO,NONE,True,Uncertain,,,,,INELIGIBLE_PROVER_MISMATCH_OR_TIMEOUT,False,Retained ineligible case
+starcoderplus,EX 153,S63,NO,NONE,ParseError:LogicalExpressionException,Uncertain,,,,,INELIGIBLE_PROVER_MISMATCH_OR_TIMEOUT,False,Retained ineligible case
+starcoderplus,EX 154,S34,NO,NONE,ProverError:RecursionError,True,,,,,INELIGIBLE_PROVER_MISMATCH_OR_TIMEOUT,False,Retained ineligible case
+starcoderplus,EX 157,S52,NO,NONE,Uncertain,Timeout,,,,,INELIGIBLE_PROVER_MISMATCH_OR_TIMEOUT,False,Retained ineligible case
+starcoderplus,EX 158,S06,NO,NONE,ProverError:RecursionError,True,,,,,INELIGIBLE_PROVER_MISMATCH_OR_TIMEOUT,False,Retained ineligible case
+starcoderplus,EX 159,S60,NO,NONE,Timeout,True,,,,,INELIGIBLE_PROVER_MISMATCH_OR_TIMEOUT,False,Retained ineligible case
+starcoderplus,EX 164,S48,NO,NONE,Uncertain,Timeout,,,,,INELIGIBLE_PROVER_MISMATCH_OR_TIMEOUT,False,Retained ineligible case
+starcoderplus,EX 175,S30,YES,PREMISE_DELETION_P1,False,False,Uncertain,False,,,DELETION_DISAGREEMENT,False,Generic premise-deletion disagreement
+starcoderplus,EX 176,S23,YES,PREMISE_DELETION_P1,True,True,Uncertain,True,,,DELETION_DISAGREEMENT,False,Generic premise-deletion disagreement
+gpt-4-0613,EX 32,S45,YES,ADD_PREMISE,Uncertain,Uncertain,False,Uncertain,Uncertain,False,CONFIRMED_MASKING_AND_REPAIRED,False,XOR->OR on F1/J1 visa
+gpt-3.5-turbo-16k-0613,EX 32,S45,YES,ADD_PREMISE,Uncertain,Uncertain,False,Uncertain,Uncertain,False,CONFIRMED_MASKING_AND_REPAIRED,False,XOR->OR on F1/J1 visa (2-ary timeout check)
+starcoderplus,EX 32,S45,YES,ADD_PREMISE,Uncertain,Uncertain,False,Uncertain,Uncertain,False,CONFIRMED_MASKING_AND_REPAIRED,False,XOR->OR on F1/J1 visa
+gpt-4-0613,EX 56,S45,YES,ADD_PREMISE,Uncertain,Uncertain,False,Uncertain,Uncertain,False,CONFIRMED_MASKING_AND_REPAIRED,False,XOR->OR on F1/J1 visa
+gpt-3.5-turbo-16k-0613,EX 56,S45,YES,ADD_PREMISE,Uncertain,Uncertain,False,Uncertain,Uncertain,False,CONFIRMED_MASKING_AND_REPAIRED,False,XOR->OR on F1/J1 visa
+gpt-4-0613,EX 152,S47,YES,REPLACE_PREMISE_P4,True,True,False,Uncertain,True,False,CONFIRMED_MASKING_AND_REPAIRED,False,XOR->OR on NLG/NLU
+gpt-3.5-turbo-16k-0613,EX 152,S47,YES,REPLACE_PREMISE_P4,True,True,False,Uncertain,True,False,CONFIRMED_MASKING_AND_REPAIRED,False,XOR->OR on NLG/NLU
+starcoderplus,EX 152,S47,YES,REPLACE_PREMISE_P4,True,True,False,Uncertain,True,False,CONFIRMED_MASKING_AND_REPAIRED,False,XOR->OR on NLG/NLU
+gpt-3.5-turbo-16k-0613,EX 57,S18,YES,ADD_PREMISE,Uncertain,Uncertain,True,Uncertain,Uncertain,True,CONFIRMED_MASKING_AND_REPAIRED,False,Unbound free variable x in P3
+gpt-4-0613,EX 57,S18,YES,ADD_PREMISE,Uncertain,Uncertain,True,Uncertain,Uncertain,Uncertain,CONFIRMED_MASKING_REPAIR_FAILED,False,Unbound free variable x in P3 (secondary predicate mismatch prevents single-formula repair)
+gpt-4-0613,EX 87,S39,YES,ADD_PREMISE,Uncertain,Uncertain,True,Uncertain,Uncertain,Uncertain,CONFIRMED_MASKING_REPAIR_FAILED,False,NotGoToBedLateAndWakeUpLate disconnected predicate + P6 OR/XOR
+starcoderplus,EX 150,S12,YES,ADD_PREMISE,Uncertain,Uncertain,False,Uncertain,Uncertain,Uncertain,CONFIRMED_MASKING_REPAIR_FAILED,False,Corrupted P7 branch (secondary predicate mismatch prevents single-formula repair)
+gpt-3.5-turbo-16k-0613,EX 31,S37,YES,PREMISE_DELETION_P6,True,True,Uncertain,True,True,Uncertain,CONFIRMED_MASKING_AND_REPAIRED,True,Conclusion XOR->OR exposed by deleting P6 (English either/or ambiguity in gold)
+starcoderplus,EX 31,S37,YES,PREMISE_DELETION_P6,True,True,Uncertain,True,True,Uncertain,CONFIRMED_MASKING_AND_REPAIRED,True,Conclusion XOR->OR exposed by deleting P6 (English either/or ambiguity in gold)

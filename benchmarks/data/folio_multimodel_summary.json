@@ -1,0 +1,209 @@
+{
+  "yale_v0_match": "204/204",
+  "evaluated_examples": 182,
+  "distinct_stories": 67,
+  "runs": [
+    {
+      "run": "gpt-4-0613_folio-neurosymbolic-8shot",
+      "model": "gpt-4-0613",
+      "nshot": 8,
+      "examples": 182,
+      "stories": 67,
+      "maj_correct": 132,
+      "maj_acc_pct": 72.53,
+      "indiv_total": 1820,
+      "indiv_correct": 1165,
+      "indiv_acc_pct": 64.01,
+      "indiv_solver_err": 235,
+      "indiv_solver_err_pct": 12.91
+    },
+    {
+      "run": "gpt-3.5-turbo-16k-0613_folio-neurosymbolic-1shot",
+      "model": "gpt-3.5-turbo-16k-0613",
+      "nshot": 1,
+      "examples": 182,
+      "stories": 67,
+      "maj_correct": 100,
+      "maj_acc_pct": 54.95,
+      "indiv_total": 1820,
+      "indiv_correct": 606,
+      "indiv_acc_pct": 33.3,
+      "indiv_solver_err": 933,
+      "indiv_solver_err_pct": 51.26
+    },
+    {
+      "run": "gpt-3.5-turbo-16k-0613_folio-neurosymbolic-2shot",
+      "model": "gpt-3.5-turbo-16k-0613",
+      "nshot": 2,
+      "examples": 182,
+      "stories": 67,
+      "maj_correct": 110,
+      "maj_acc_pct": 60.44,
+      "indiv_total": 1820,
+      "indiv_correct": 834,
+      "indiv_acc_pct": 45.82,
+      "indiv_solver_err": 563,
+      "indiv_solver_err_pct": 30.93
+    },
+    {
+      "run": "gpt-3.5-turbo-16k-0613_folio-neurosymbolic-4shot",
+      "model": "gpt-3.5-turbo-16k-0613",
+      "nshot": 4,
+      "examples": 182,
+      "stories": 67,
+      "maj_correct": 117,
+      "maj_acc_pct": 64.29,
+      "indiv_total": 1820,
+      "indiv_correct": 943,
+      "indiv_acc_pct": 51.81,
+      "indiv_solver_err": 432,
+      "indiv_solver_err_pct": 23.74
+    },
+    {
+      "run": "gpt-3.5-turbo-16k-0613_folio-neurosymbolic-8shot",
+      "model": "gpt-3.5-turbo-16k-0613",
+      "nshot": 8,
+      "examples": 182,
+      "stories": 67,
+      "maj_correct": 114,
+      "maj_acc_pct": 62.64,
+      "indiv_total": 1820,
+      "indiv_correct": 934,
+      "indiv_acc_pct": 51.32,
+      "indiv_solver_err": 435,
+      "indiv_solver_err_pct": 23.9
+    },
+    {
+      "run": "starcoderplus_folio-neurosymbolic-1shot",
+      "model": "starcoderplus",
+      "nshot": 1,
+      "examples": 182,
+      "stories": 67,
+      "maj_correct": 82,
+      "maj_acc_pct": 45.05,
+      "indiv_total": 1820,
+      "indiv_correct": 377,
+      "indiv_acc_pct": 20.71,
+      "indiv_solver_err": 1046,
+      "indiv_solver_err_pct": 57.47
+    },
+    {
+      "run": "starcoderplus_folio-neurosymbolic-2shot",
+      "model": "starcoderplus",
+      "nshot": 2,
+      "examples": 182,
+      "stories": 67,
+      "maj_correct": 82,
+      "maj_acc_pct": 45.05,
+      "indiv_total": 1820,
+      "indiv_correct": 517,
+      "indiv_acc_pct": 28.41,
+      "indiv_solver_err": 704,
+      "indiv_solver_err_pct": 38.68
+    },
+    {
+      "run": "starcoderplus_folio-neurosymbolic-4shot",
+      "model": "starcoderplus",
+      "nshot": 4,
+      "examples": 182,
+      "stories": 67,
+      "maj_correct": 97,
+      "maj_acc_pct": 53.3,
+      "indiv_total": 1820,
+      "indiv_correct": 626,
+      "indiv_acc_pct": 34.4,
+      "indiv_solver_err": 617,
+      "indiv_solver_err_pct": 33.9
+    },
+    {
+      "run": "starcoderplus_folio-neurosymbolic-8shot",
+      "model": "starcoderplus",
+      "nshot": 8,
+      "examples": 182,
+      "stories": 67,
+      "maj_correct": 102,
+      "maj_acc_pct": 56.04,
+      "indiv_total": 1820,
+      "indiv_correct": 604,
+      "indiv_acc_pct": 33.19,
+      "indiv_solver_err": 684,
+      "indiv_solver_err_pct": 37.58
+    }
+  ],
+  "primary_8shot_audits": {
+    "gpt-4-0613": {
+      "label": "GPT-4 (0613)",
+      "majority_correct": 132,
+      "correct_faithful": 103,
+      "correct_erroneous": 17,
+      "correct_ambiguous": 12,
+      "incorrect_or_error": 50,
+      "err_prevalence_pct": 12.88,
+      "story_clustered_ci95_pct": [
+        6.5,
+        20.49
+      ],
+      "err_stories": 13,
+      "total_maj_stories": 62,
+      "error_categories": {
+        "PREDICATE_CONFLATION": 1,
+        "INCORRECT_PREDICATE_ARGS": 3,
+        "CONJUNCTION_DISJUNCTION_SWAP": 3,
+        "INVENTED_OR_ALTERED_CONSTRAINT": 3,
+        "INCORRECT_NEGATION_OR_POLARITY": 2,
+        "SCOPE_ERROR": 2,
+        "MISSING_QUANTIFIER": 1,
+        "OMITTED_OR_DROPPED_PREMISE": 2
+      }
+    },
+    "gpt-3.5-turbo-16k-0613": {
+      "label": "GPT-3.5-Turbo (16k-0613)",
+      "majority_correct": 114,
+      "correct_faithful": 96,
+      "correct_erroneous": 11,
+      "correct_ambiguous": 7,
+      "incorrect_or_error": 68,
+      "err_prevalence_pct": 9.65,
+      "story_clustered_ci95_pct": [
+        3.08,
+        17.76
+      ],
+      "err_stories": 7,
+      "total_maj_stories": 59,
+      "error_categories": {
+        "QUANTIFIER_ERROR": 1,
+        "QUANTIFIER_AND_CONNECTIVE_ERROR": 2,
+        "MISSING_QUANTIFIER": 4,
+        "CONJUNCTION_DISJUNCTION_SWAP": 3,
+        "INVENTED_OR_ALTERED_CONSTRAINT": 1
+      }
+    },
+    "starcoderplus": {
+      "label": "StarCoder+",
+      "majority_correct": 102,
+      "correct_faithful": 77,
+      "correct_erroneous": 22,
+      "correct_ambiguous": 3,
+      "incorrect_or_error": 80,
+      "err_prevalence_pct": 21.57,
+      "story_clustered_ci95_pct": [
+        13.76,
+        30.69
+      ],
+      "err_stories": 21,
+      "total_maj_stories": 57,
+      "error_categories": {
+        "MISSING_QUANTIFIER": 13,
+        "CONJUNCTION_DISJUNCTION_SWAP": 3,
+        "INCORRECT_NEGATION_OR_POLARITY": 1,
+        "IMPLICATION_REVERSAL": 1,
+        "UNIVERSAL_EXPLOSION_CONTRADICTION": 1,
+        "QUANTIFIER_ERROR": 1,
+        "INVENTED_OR_ALTERED_CONSTRAINT": 1,
+        "HALLUCINATED_FACT_AND_QUANTIFIER": 1
+      }
+    }
+  },
+  "shared_erroneous_2plus_models": 12,
+  "shared_erroneous_all3_models": 3
+}
